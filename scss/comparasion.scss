@@ -1,0 +1,191 @@
+@use "sass:math";
+@use "common";
+
+.comparasion{
+    @media (min-width: common.toEm(common.$container + 30 + 41 * 2 + 48 * 2, 16)) {
+        &::before{
+            background: url("@img/icons/water-tank.svg") no-repeat;
+            background-size: contain;
+            content: "";
+    
+            position: absolute;
+            left: common.toRem(-40);
+            top: 50%;
+            transform: translateY(-50%);
+    
+            width: common.toRem(139);
+            height: common.toRem(163.51);
+        }
+    }
+
+    &__description{
+        font-family: "Russo One";
+        color: #000;
+        font-size: common.toRem(24);
+        line-height: math.div(29, 24);
+
+        margin-bottom: common.toRem(24);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__description{
+            font-size: common.toRem(22);
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) {
+        &__description{
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__description{
+            font-size: common.toRem(20);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__description{
+            font-size: common.toRem(18);
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(320, 16)) {
+        &__description{
+            font-size: common.toRem(16);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__items{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: common.toRem(-24);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__item{
+            flex: 0 0 calc(50% - common.toRem(12));
+            margin-bottom: common.toRem(24);
+        }
+    }
+    &__item{
+        display: flex;
+        padding-bottom: common.toPercent(250, common.$container);
+
+        border: common.toRem(5) solid common.$purple;
+        border-radius: common.toRem(16);
+
+        position: relative;
+        overflow: hidden;
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__item{
+            padding-bottom: common.toPercent(290, 962);
+            &:not(:last-child){
+                margin-bottom: common.toRem(16);
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+}
+.item-comparasion{
+    &__part{
+        padding: common.toRem(10);
+
+        position: absolute;
+        top: 0;
+
+        width: calc(50% + common.toPercent(100, 568) / 2);
+        height: 100%;
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__part{
+            padding: common.toRem(5);
+        }
+    }
+
+    &__part_before{
+        left: 0;
+        padding-right: common.toRem(100);
+    }
+    &__part_after{
+        right: 0;
+        padding-left: common.toRem(100);
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+}
+.part-item-comparasion{
+    &::after, img{
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+    img{
+        object-fit: cover;
+        z-index: 1;
+    }
+    &::after{
+        background: rgba($color: common.$purple, $alpha: 0.2);
+        content: "";
+        z-index: 2;
+    }
+
+    &__description{
+        position: relative;
+        z-index: 3;
+
+        font-family: "Russo One";
+        color: #fff;
+        font-size: common.toRem(18);
+        line-height: math.div(22, 18);
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__description{
+            font-size: common.toRem(16);
+        }
+    }
+
+    &__line{
+        background-color: common.$purple;
+
+        position: absolute;
+        z-index: 2;
+        top: calc(100% - 100% * 1.08);
+        left: 0;
+        transform-origin: bottom right;
+        transform: rotate(22.5deg) translateX(-100%);
+
+        width: common.toRem(5);
+        height: calc(100% * 1.08 + common.toRem(5));
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__line{
+            transform: rotate(30.1deg) translateX(-100%);
+            top: calc(100% - 100% * 1.16);
+            height: calc(100% * 1.16 + common.toRem(5));
+        }
+    }
+}
+.part_before-item-comparasion{
+    img, &::after{
+        clip-path: polygon(0 0, 100% 0, calc(100% - common.toPercent(100, 334)) 100%, 0% 100%);
+    }
+}
+.part_after-item-comparasion{
+    img, &::after{
+        clip-path: polygon(common.toPercent(100, 334) 0, 100% 0, 100% 100%, 0% 100%);
+    }
+}
