@@ -12,3 +12,11 @@ $container: 1180;
 @function toPercent($child, $parent){
     @return $child / $parent * 100%;
 }
+
+.container{
+    max-width: toRem($container + 30);
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}

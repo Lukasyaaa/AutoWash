@@ -1,0 +1,589 @@
+@use "sass:math";
+@use "common";
+
+.header{
+    background-color: #fff;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+    &._scroll{
+        box-shadow: 0 0 20px rgba($color: #000, $alpha: 0.6);
+    }
+
+    @media (max-width: common.toEm(992, 16)) {
+        &::after{
+            background-color: #fff;
+            content: "";
+    
+            position: absolute;
+            z-index: 6;
+            right: -100%;
+            top: 0;
+    
+            width: 100%;
+            height: 100%;
+
+            transition: right 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+    }
+    &._active::after{
+        right: 0;
+    }
+
+    .container{
+        display: flex;
+        min-height: common.toRem(100);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        .container{
+            min-height: common.toRem(90);
+        }
+    }
+    @media (max-width: common.toEm(768, 16))  and (min-width: common.toEm(481, 16)) {
+        .container{
+            min-height: common.toRem(80);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        .container{
+            justify-content: space-between;
+        }
+    }
+    @media (max-width: common.toEm(480, 16))  and (min-width: common.toEm(321, 16)) {
+        .container{
+            min-height: common.toRem(70);
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        .container{
+            min-height: common.toRem(60);
+        }
+    }
+
+    @media (max-width: common.toEm(992, 16)) {
+        .container > *:not(.header__menu){
+            position: relative;
+            z-index: 7;
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__menu{
+            display: flex;
+            align-items: center;
+        }
+        &__menu, &__button{
+            flex: 0 1 50%;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__menu{
+            background: rgba($color: common.$purple, $alpha: 0.8);
+
+            overflow-y: auto;
+            position: fixed;
+            z-index: 5;
+            right: -100%;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            transition: right 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+        &._active &__menu{
+            right: 0;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__menu{
+            padding: calc(common.toRem(80) + common.toRem(24)) 15px common.toRem(48);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__menu{
+            padding: calc(common.toRem(70) + common.toRem(16)) 15px common.toRem(32);
+        }
+    }
+    @media (max-width: common.toEm(320, 16)) {
+        &__menu{
+            padding: calc(common.toRem(60) + common.toRem(16)) 15px common.toRem(32);
+        }
+    }
+
+    &__image{
+        padding-top: 8.75px;
+        padding-bottom: 8.75px;
+
+        max-height: calc(common.toRem(100));
+        flex: 0 0 auto;
+        align-self: center;
+        margin: 0 common.toRem(24);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__image{
+            margin: 0 common.toRem(16) 0 0;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__image{
+            max-height: calc(common.toRem(90));
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__image{
+            max-height: calc(common.toRem(80));
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__image{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__image{
+            max-height: calc(common.toRem(70));
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__image{
+            max-height: calc(common.toRem(60));
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__button{
+            align-self: center;
+
+            padding-top: 8.75px;
+            padding-bottom: 8.75px;
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__button{
+                flex: 1 1 auto;
+            }
+        }
+    
+        &__button button{
+            border-radius: common.toRem(16);
+            background-color: common.$purple;
+            padding: common.toRem(10) common.toRem(24);
+    
+            display: flex;
+            align-items: center;
+            justify-self: flex-end;
+            min-height: common.toRem(64);  
+            
+            position: relative;
+            span{
+                position: relative;
+                z-index: 2;
+
+                font-family: "Russo One";
+                color: #fff;
+                font-size: common.toRem(22);
+                line-height: math.div(24, 22); 
+
+                transition: color 0.3s cubic-bezier(.81,.8,.04,.98);
+            }
+            &::after{
+                border-radius: common.toRem(16);
+                background-color: #fff;
+                border: 0 solid common.$purple;
+                content: "";
+
+                position: absolute;
+                z-index: 1;
+                left: 50%;
+                top: 50%;
+                transform: translateY(-50%) translateX(-50%);
+
+                width: 0;
+                height: 0;
+
+                transition: width 0.3s cubic-bezier(.81,.8,.04,.98),
+                height 0.3s cubic-bezier(.81,.8,.04,.98);
+            }
+        }
+        &__button button:focus{
+            outline: none;
+            &::after{
+                border-width: common.toRem(3);
+                width: 100%;
+                height: 100%;
+            }
+            span{
+                color: common.$purple;
+            }
+        }
+        @media (any-hover: hover) {
+            &__button button:hover{
+                &::after{
+                    border-width: common.toRem(3);
+                    width: 100%;
+                    height: 100%;
+                }
+                span{
+                    color: common.$purple;
+                }
+            }
+        }
+        @media (max-width: common.toEm(768, 16)) {
+            &__button button{
+                border-radius: common.toRem(13);
+    
+                min-height: common.toRem(52);
+                font-size: common.toRem(18);
+            }
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__button button{
+            border-radius: common.toRem(14.5);
+
+            min-height: common.toRem(58);
+            font-size: common.toRem(20);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__button{
+            display: none;
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__burger{
+            display: none;
+        }
+    }
+
+    @media (max-width: common.toEm(992, 16)) {
+        &__burger{
+            align-self: center;
+
+            background-color: common.$purple;
+            position: relative;
+            &::after, &::before{
+                content: "";
+            }
+            &::after, &::before, span{
+                border-radius: calc(common.toRem(4) / 2);
+                background: #fff;
+
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+
+                height: common.toRem(3);
+            }
+            &::before{
+                transition: top 0.3s cubic-bezier(.81,.8,.04,.98),
+                transform 0.3s cubic-bezier(.81,.8,.04,.98), 
+                filter 0.2s cubic-bezier(.81,.8,.04,.98);
+            }
+            span{
+                top: 50%;
+                transform: translateY(-50%) translateX(-50%);
+                transition: transform 0.3s cubic-bezier(.81,.8,.04,.98), 
+                filter 0.2s cubic-bezier(.81,.8,.04,.98);
+            }
+            &::after{
+                transition: bottom 0.3s cubic-bezier(.81,.8,.04,.98),
+                transform 0.3s cubic-bezier(.81,.8,.04,.98), 
+                filter 0.2s cubic-bezier(.81,.8,.04,.98);
+            }
+        }
+        &._active &__burger{
+            span{
+                transform: translateY(-50%) translateX(-50%) scale(0);
+            }
+            &::after{
+                bottom: 50%;
+                transform: translateY(50%) translateX(-50%) rotate(-45deg);
+            }
+            &::before{
+                top: 50%; 
+                transform: translateY(-50%) translateX(-50%) rotate(45deg);
+            }
+        }
+
+        @media (min-width: common.toEm(481, 16)) {
+            &__burger{
+                margin-left: common.toRem(16);
+            }
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(321, 16)) {
+        &__burger{
+            border-radius: common.toRem(8);
+            flex: 0 0 calc(common.toRem(29) + common.toRem(16));
+            height: calc(common.toRem(25.4) + common.toRem(16));
+            &::before{
+                top: calc(common.toRem(16) / 2 + common.toRem(3));
+            }
+            &::after{
+                bottom: calc(common.toRem(16) / 2 + common.toRem(3));
+            }
+            &::after, &::before, span{
+                width: calc(100% - common.toRem(16));
+            }
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__burger{
+            border-radius: common.toRem(5);
+            flex: 0 0 calc(common.toRem(29) + common.toRem(10));
+            height: calc(common.toRem(25.4) + common.toRem(10));
+            &::before{
+                top: calc(common.toRem(10) / 2 + common.toRem(3.34299516908));
+            }
+            &::after{
+                bottom: calc(common.toRem(10) / 2 + common.toRem(3.34299516908));
+            }
+            &::after, &::before, span{
+                width: calc(100% - common.toRem(10));
+            }
+        }
+    }
+    &__burger:focus{
+        outline: none;
+        &::after, &::before, span{
+            filter: drop-shadow(0 0 2px #fff);
+        }
+    }
+    @media (any-hover: hover) {
+        &__burger:hover{
+            &::after, &::before, span{
+                filter: drop-shadow(0 0 2px #fff);
+            }
+        }
+    }
+}
+.menu{
+    @media (min-width: common.toEm(993, 16)) {
+        &__list, &__link, &__link a{
+            min-height: 100%;
+        }
+      
+        &__list{
+            display: flex;
+            flex-wrap: wrap;
+            margin: common.toRem(-2.5) common.toRem(-32);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__list{
+            position: relative;
+            padding-bottom: common.toRem(16);
+            &::before, &::after{
+                background: #fff;
+                content: "";
+
+                position: absolute;
+                top: 0;
+            
+                height: 100%;
+                width: common.toRem(4);
+            }
+            &::before{
+                left: -15px;
+            }
+            &::after{
+                right: -15px;
+            }
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__link{
+            padding: 0 common.toRem(32);
+            position: relative;
+            &:not(:last-child)::after{
+                background: url("@img/icons/blot.svg");
+                background-size: contain;
+                content: "";
+                
+                position: absolute;
+                right: 0;
+                bottom: 50%;
+                transform: translateY(50%) translateX(50%);
+    
+                width: common.toRem(24);
+                height: common.toRem(20.84);
+            }
+        }
+        &__link a{
+            display: flex;
+            align-items: center;
+
+            padding: common.toRem(2.5) 0;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__link{
+            display: flex;
+            align-items: center;
+
+            &::after, &::before{
+                background-color: #fff;
+                content: "";
+
+                height: common.toRem(4);
+                flex: 1 1 auto;
+            }
+            &::before{
+                margin-left: -15px;
+            }
+            &::after{
+                margin-right: -15px;
+            }
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link a{
+            flex: 1 1 calc(100% - common.toRem(32) * 2);
+        }
+        &__link:not(:last-child){
+            margin-bottom: common.toRem(16);
+        }
+    }
+    
+    @media (max-width: common.toEm(480, 16)) {
+        &__link a{
+            flex: 1 1 calc(100% - common.toRem(24) * 2);
+        }
+        &__link:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__link a{
+            position: relative;
+            &::after{
+                background-color: common.$purple;
+                content: "";
+    
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+            
+                width: 0;
+                height: common.toRem(7);
+    
+                transition: 0.3s cubic-bezier(.81,.8,.04,.98) width;
+            }
+        }
+        &__link a:focus{
+            outline: none;
+            &::after{
+                width: 100%;
+            }
+        }
+        @media (any-hover: hover) {
+            &__link a:hover::after{
+                width: 100%;
+            }
+        }
+    }
+    &__link a{
+        font-family: "Russo One";
+        color: common.$purple;
+        font-size: common.toRem(22);
+        line-height: math.div(24, 22);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__link a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: common.toRem(48);
+            text-align: center;
+
+            background-color: common.$purple;
+            border: common.toRem(4) solid #fff;
+            padding: common.toRem(5) common.toRem(16);
+            color: #fff;
+
+            transition: 0.3s cubic-bezier(.81,.8,.04,.98) box-shadow;
+        }
+        &__link a:focus{
+            outline: none;
+            box-shadow: inset 0 0 8px #fff;
+        }
+        @media (any-hover: hover) {
+            &__link a:hover{
+                box-shadow: inset 0 0 8px #fff;
+            }
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link a{
+            font-size: common.toRem(32);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__link a{
+            font-size: common.toRem(22);
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__button{
+            display: none;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__button{
+            margin-top: common.toRem(16);
+            background-color: #fff;
+
+            display: block;
+            width: 100%;
+            padding: common.toRem(10) common.toRem(16);
+
+            font-family: "Russo One";
+            color: common.$purple;
+            font-size: common.toRem(22);
+            line-height: math.div(24, 22);
+
+            transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98),
+            text-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+        &__button:focus{
+            outline: none;
+            box-shadow: 0 0 10px #fff;
+            text-shadow: 0 0 5px common.$purple;
+        }
+        @media (any-hover: hover) {
+            &__button:hover{
+                box-shadow: 0 0 10px #fff;
+                text-shadow: 0 0 5px common.$purple;
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__button{
+            min-height: common.toRem(64);
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__button{
+            min-height: common.toRem(56);
+        }
+    }
+}
