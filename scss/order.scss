@@ -1,0 +1,296 @@
+@use "sass:math";
+@use "common";
+
+body:not(._appear-modal) .windows{
+    transform: translateY(-50%) scaleX(0);
+    pointer-events: none;
+}
+
+.windows{
+    position: fixed;
+    z-index: 9;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleX(1);
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: transform 0.3s cubic-bezier(.81,.8,.04,.98);
+    
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    max-height: 100%;
+    width: 100%;
+
+    padding: common.toRem(32) 15px;
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        padding: common.toRem(24) 15px;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        padding: common.toRem(15) 15px;
+    }
+}
+
+body:not(._appear-modal) .order > *{
+    pointer-events: none;
+}
+.order{
+    max-width: common.toRem(992);
+    width: calc(100%);
+
+    &__inner{
+        border-radius: common.toRem(32);
+        border: common.toRem(5) solid #fff;
+        background-color: #fff;
+        padding: 0 calc(common.toRem(24) - common.toRem(5));
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__inner{
+            border-radius: common.toRem(24);
+            padding: 0 calc(common.toRem(16) - common.toRem(5));
+        }
+    }
+
+    &__close, &__send{
+        background-color: common.$purple;
+
+        width: calc(100% + (common.toRem(24) - common.toRem(5)) * 2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: common.toRem(72);
+
+        margin: 0 0 0 calc((common.toRem(24) - common.toRem(5)) * -1);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__close, &__send{
+            min-height: common.toRem(64);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__close, &__send{
+            min-height: common.toRem(56);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__close, &__send{
+            width: calc(100% + (common.toRem(16) - common.toRem(5)) * 2);
+            margin: 0 0 0 calc((common.toRem(16) - common.toRem(5)) * -1);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__close, &__send{
+            min-height: common.toRem(46);
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__close, &__send{
+            min-height: common.toRem(40);
+        }
+    }
+
+    &__close{
+        overflow: hidden;
+        border-radius: calc(common.toRem(32) - common.toRem(5)) calc(common.toRem(32) - common.toRem(5)) 0 0;
+        transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+        &::after{
+            background: url("@img/icons/close.svg") no-repeat;
+            background-size: contain;
+            content: "";
+
+            display: inline-block;
+            min-width: common.toRem(24);
+            height: common.toRem(24);
+
+            transition: filter 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+    }
+    &__close:focus{
+        outline: none;
+        box-shadow: inset 0 0 15px #000;
+        &::after{
+            filter: drop-shadow(0 0 2px #fff);
+        }
+    }
+    @media (any-hover: hover) {
+        &__close:hover{
+            box-shadow: inset 0 0 15px #000;
+            &::after{
+                filter: drop-shadow(0 0 2px #fff);
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__close{
+            border-radius: calc(common.toRem(24) - common.toRem(5)) calc(common.toRem(24) - common.toRem(5)) 0 0;
+            &::after{
+                min-width: common.toRem(20);
+                height: common.toRem(20);
+            }
+        }
+    }
+
+    &__explanation{
+        padding: common.toRem(16) 0;
+
+        font-family: "Russo One";
+        color: #000;
+        font-size: common.toRem(32);
+        line-height: math.div(34, 32);  
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(993, 16)) {
+        &__explanation{
+            font-size: common.toRem(28);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)){
+        &__explanation{
+            font-size: common.toRem(24);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__explanation{
+            padding: common.toRem(10) 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__explanation{
+            font-size: common.toRem(20);
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__explanation{
+            font-size: common.toRem(18);
+            line-height: math.div(18, 18);
+        }
+    }
+
+    &__textarea{
+        border-radius: common.toRem(32);
+        border: common.toRem(5) solid common.$purple;
+        box-shadow: inset 0 0 15px common.$purple;
+
+        font-family: "Russo One";
+        color: #000;
+        font-size: common.toRem(26);
+        line-height: math.div(24, 22);
+        &::placeholder{
+            color: #000;
+        }  
+
+        width: 100%;
+        min-height: common.toRem(240);
+        padding: common.toRem(24);
+        margin-bottom: common.toRem(16);
+
+        transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+    &__textarea:focus{ 
+        outline: none;
+        box-shadow: inset 0 0 25px common.$purple;
+    }
+    @media (any-hover: hover) {
+        &__textarea:hover{ 
+            box-shadow: inset 0 0 25px common.$purple;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__textarea{
+            font-size: common.toRem(22);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__textarea{
+            padding: common.toRem(20);
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(321, 16)) {
+        &__textarea{
+            padding: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__textarea{
+            min-height: common.toRem(200);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__textarea{
+            border-radius: common.toRem(24);
+
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__textarea{
+            font-size: common.toRem(18);
+            min-height: common.toRem(160);
+        }
+    }
+
+    @media (max-width: common.toEm(320, 16)) {
+        &__textarea{
+            font-size: common.toRem(16);
+                
+            padding: common.toRem(10);
+            min-height: common.toRem(130);
+        }
+    }
+
+    &__send{
+        border-radius: 0 0 calc(common.toRem(32) - common.toRem(5)) calc(common.toRem(32) - common.toRem(5));
+
+        font-family: "Russo One";
+        color: #fff;
+        font-size: common.toRem(32);
+        line-height: math.div(24, 22);
+
+        transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98),
+        text-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+    &__send:focus{
+        outline: none;
+        box-shadow: inset 0 0 15px #000;
+        text-shadow: 0 0 2px #fff;
+    }
+    @media (any-hover: hover) {
+        &__send:hover{
+            box-shadow: inset 0 0 15px #000;
+            text-shadow: 0 0 2px #fff;
+        }
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(993, 16)) {
+        &__send{
+            font-size: common.toRem(28);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__send{
+            font-size: common.toRem(24);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__send{
+            border-radius: 0 0 calc(common.toRem(24) - common.toRem(5)) calc(common.toRem(24) - common.toRem(5));
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__send{
+            font-size: common.toRem(20);
+        }
+    }
+    
+    @media (max-width: common.toEm(320, 16)) {
+        &__send{
+            font-size: common.toRem(18);
+        }
+    }
+}

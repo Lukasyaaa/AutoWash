@@ -13,6 +13,36 @@ $container: 1180;
     @return $child / $parent * 100%;
 }
 
+body{
+    position: relative;
+    &::after{
+        background-color: rgba($color: $purple, $alpha: 0.8);
+        content: "";
+
+        position: fixed;
+        z-index: 8;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+
+        opacity: 0;
+
+        width: 100%;
+        height: 100%;
+    
+        transition: opacity 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+}
+body._locked{
+    overflow-y: hidden;
+}
+body:not(._appear-modal)::after{
+    pointer-events: none;
+}
+body._appear-modal::after{
+    opacity: 1;
+}
+
 .container{
     max-width: toRem($container + 30);
     margin-right: auto;
