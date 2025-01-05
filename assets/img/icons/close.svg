@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="523.67499"
+   height="523.67499"
+   viewBox="0 0 670.30398 670.30398"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="close.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.34780815"
+     inkscape:cx="323.45418"
+     inkscape:cy="409.70863"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     fill="#000000"
+     d="m 18.738332,18.738333 a 64,64 0 0 1 90.495998,0 l 226.304,226.303997 226.304,-226.303997 a 64,64 0 0 1 90.496,90.495997 l -226.304,226.304 226.304,226.304 a 64,64 0 0 1 -90.496,90.496 l -226.304,-226.304 -226.304,226.304 a 64,64 0 0 1 -90.495998,-90.496 L 245.04233,335.53833 18.738332,109.23433 a 64,64 0 0 1 0,-90.495997 z"
+     id="path1"
+     style="fill:#ffffff;fill-opacity:1" />
+</svg>

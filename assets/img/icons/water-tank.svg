@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="632.01801"
+   height="738.28101"
+   viewBox="0 0 404.49152 472.49984"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="water-tank.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.34780815"
+     inkscape:cx="1178.8108"
+     inkscape:cy="642.59564"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     fill="#000000"
+     d="m 120.88,0 c -14.5,0 -38,3.89 -56.7,11.36 -9.29,3.73 -17.41,8.37 -22.69,13.25 A 29.895,29.895 0 0 0 36.87,30 h 168.01 c -1.2,-1.77 -2.6,-3.55 -4.6,-5.39 -5.3,-4.88 -13.4,-9.52 -22.7,-13.25 C 158.88,3.89 135.38,0 120.88,0 Z m -71,48 v 129.9 l 71,42.6 71,-42.6 V 48 Z m 167,78 v 18 h 23 v 14 h -30 v 18 h 51.3 l 29.3,29.4 12.8,-12.8 -34.7,-34.6 h -10.7 v -14 h 23 V 126 Z M 45.53,196.3 0,469.5 17.76,472.5 35.18,368 h 171.4 l 17.4,104.5 17.8,-3 -45.5,-273.2 -16.7,10 13.7,81.8 -72.4,26.4 -72.38,-26.3 13.68,-81.9 z m 263.15,22.4 c 0,0 -10.2,49.6 5.2,59.7 9.8,6.4 28.8,-2.9 31,-15.4 3.8,-19.6 -36.2,-44.3 -36.2,-44.3 z m 29.2,85.3 c 0,0 -13.4,29.1 -5.8,38.5 4.9,5.9 17.4,3.7 20.6,-3.6 5.2,-11.6 -14.8,-34.9 -14.8,-34.9 z m -292.41,2.3 48.91,17.8 -55.22,20.1 z m 150.81,0 6.3,37.9 -55.2,-20.1 z m 179,7.5 c 0,0 1.4,32.1 12.4,36.9 7.2,3 17.2,-4.7 16.8,-12.7 -0.8,-12.6 -29.2,-24.2 -29.2,-24.2 z m -254.4,19.9 44.8,16.3 h -89.6 z m 251.7,40.5 c 0,0 -3.4,21.5 3.4,26.2 4.3,2.9 12.1,-1 12.8,-6.3 1.3,-8.6 -16.2,-19.9 -16.2,-19.9 z"
+     id="path1"
+     style="fill:#5f4a8b;fill-opacity:1" />
+</svg>

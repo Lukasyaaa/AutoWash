@@ -1,0 +1,30 @@
+*,*::after,*::before{
+    box-sizing: border-box;
+}
+body, ul, ol, h1, h2, h3, h4, h5, h6, dl, dd, p, figure{
+    margin: 0;
+}
+ul, ol{
+    list-style: none;
+}
+textarea{
+    display: block;
+    resize: vertical;
+}
+button, textarea{
+    background-color: transparent;
+    border: 0;
+}
+button{
+    cursor: pointer;
+}
+ul, ol, button, textarea{
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a, button, span{
+    display: inline-block;
+}
