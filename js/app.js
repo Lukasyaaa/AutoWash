@@ -51,17 +51,18 @@ const spoilersToggleAction = (e) => {
 }
 
 const priceItemCondition = (e) => {
-    return e.target.closest(".item-price__button");
+    return e.target.closest(".item-price__link");
 }
 
 let handleOpenSpoiler;
 let handleCloseSpoiler;
-const priceItemAction = (e, titles, values, totalPrice, spoilerChoosed, spoilerChoosedInfo, spoilerChoosedList, spoilerChoosedOpener) => {
+const priceItemAction = (e, titles, values, containers, totalPrice, spoilerChoosed, spoilerChoosedInfo, spoilerChoosedList, spoilerChoosedOpener) => {
+
     let price = 0;
     let service = "";
-    let auto = "";
+    let auto = [];
     for(const value of values){
-        if(e.target.closest(".item-price__button").contains(value)){
+        if(e.target.closest(".link-item-price").contains(value)){
             price = parseInt(value.innerText);
             break;
         }
@@ -78,48 +79,56 @@ const priceItemAction = (e, titles, values, totalPrice, spoilerChoosed, spoilerC
         {checked: "crossover", visible: "Кросовер"},
         {checked: "passenger", visible: "Легковий"}
     ];
-    if(e.target.closest(".item-price__button").classList.contains("item_common-price__button")){
-        auto = "Будь-який";
-    } else {
-        outerLoop: for(const typeAuto of typeAutos){
-            for(const classPart of e.target.closest(".item-price__link").className.split(" ")){
-                if(classPart === typeAuto.checked){
-                    auto = typeAuto.visible;
-                    break outerLoop;
+    
+    let needeContainer;
+    for(const container of containers){
+        if(e.target.closest(".link-item-price").contains(container)){
+            needeContainer = container;
+            break;
+        }
+    }
+    if(needeContainer){
+        for(const typeAuto of typeAutos){
+            for(const child of needeContainer.childNodes){
+                if(child.nodeType === Node.ELEMENT_NODE){
+                    for(const classPart of child.className.split(" ")){
+                        if(classPart === typeAuto.checked){
+                            auto.push(typeAuto.visible);
+                        }
+                    }
                 }
             }
         }
-    }
-    let spoilerLinks = document.querySelectorAll(".spoiler_choosed-price__link button");
-    debugger;
+        let spoilerLinks = document.querySelectorAll(".spoiler_choosed-price__link button");
 
-    totalPrice.innerText = parseInt(totalPrice.innerText) + price;
-    spoilerChoosedList.insertAdjacentHTML("beforeend",
-        `<li class="spoiler-price__link spoiler_choosed-price__link spoiler__link" data-id="${spoilerLinks.length}">
-            <span>${auto} ${service} ${price}грн.</span>
-            <button></button>
-        </li>`
-    );
-    spoilerLinks = document.querySelectorAll(".spoiler_choosed-price__link button")
+        totalPrice.innerText = parseInt(totalPrice.innerText) + price;
+        spoilerChoosedList.insertAdjacentHTML("beforeend",
+            `<li class="spoiler-price__link spoiler_choosed-price__link spoiler__link" data-id="${spoilerLinks.length}">
+                <span>${auto.reverse().join("/")}: ${service} (${price}грн.)</span>
+                <button></button>
+            </li>`
+        );
+        spoilerLinks = document.querySelectorAll(".spoiler_choosed-price__link button")
 
-    if (!handleOpenSpoiler || !handleCloseSpoiler) {
-        handleOpenSpoiler = () => openSpoiler(spoilerChoosed, spoilerChoosedInfo, spoilerChoosedList);
-        handleCloseSpoiler = () => closeSpoiler(spoilerChoosed, spoilerChoosedInfo);
-    }
+        if (!handleOpenSpoiler || !handleCloseSpoiler) {
+            handleOpenSpoiler = () => openSpoiler(spoilerChoosed, spoilerChoosedInfo, spoilerChoosedList);
+            handleCloseSpoiler = () => closeSpoiler(spoilerChoosed, spoilerChoosedInfo);
+        }
 
-    if(spoilerLinks.length === 1){
-        spoilerLinks[0].addEventListener("focus", handleOpenSpoiler);
-        spoilerLinks[0].addEventListener("blur", handleCloseSpoiler);
-    } else  {
-        spoilerLinks[spoilerLinks.length - 2].removeEventListener("blur", handleCloseSpoiler);
-        spoilerLinks[spoilerLinks.length - 1].addEventListener("blur", handleCloseSpoiler);
-    }
+        if(spoilerLinks.length === 1){
+            spoilerLinks[0].addEventListener("focus", handleOpenSpoiler);
+            spoilerLinks[0].addEventListener("blur", handleCloseSpoiler);
+        } else  {
+            spoilerLinks[spoilerLinks.length - 2].removeEventListener("blur", handleCloseSpoiler);
+            spoilerLinks[spoilerLinks.length - 1].addEventListener("blur", handleCloseSpoiler);
+        }
 
-    if(spoilerChoosed.classList.contains("_active")){
-        spoilerChoosedInfo.style.height = spoilerChoosedList.offsetHeight + "px";
-    } else if(spoilerChoosed.classList.contains("_disabled")){
-        spoilerChoosed.classList.remove("_disabled");
-        spoilerChoosedOpener.tabIndex = 0;
+        if(spoilerChoosed.classList.contains("_active")){
+            spoilerChoosedInfo.style.height = spoilerChoosedList.offsetHeight + "px";
+        } else if(spoilerChoosed.classList.contains("_disabled")){
+            spoilerChoosed.classList.remove("_disabled");
+            spoilerChoosedOpener.tabIndex = 0;
+        }
     }
 }
 
@@ -213,6 +222,23 @@ window.addEventListener("DOMContentLoaded", () => {
         priceContainer.classList.add("_two-child");
     }
 
+    const priceButtons = document.querySelectorAll(".link-item-price__container");
+    const priceButtonsLinks = document.querySelectorAll(".link-item-price__child");
+    if(priceButtons.length > 0 && priceButtonsLinks.length > 0 ){
+        for(let i = 0, countsLinks = 0; i < priceButtons.length;){
+            for(let j = 0; j < priceButtonsLinks.length; j++){
+                if(priceButtonsLinks[j].parentNode !== priceButtons[i]) {
+                    priceButtons[i].classList.add(`_${countsLinks}-child`);
+                    i++;
+                    countsLinks = 0;
+                }
+                countsLinks++;
+            }
+            priceButtons[i].classList.add(`_${countsLinks}-child`);
+            break;
+        }
+    }
+
     const header = document.querySelector(".header");
 
     const focusableElements = document.querySelectorAll("a, input, button, textarea");
@@ -222,7 +248,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const modalSend = document.querySelector(".order__send");
 
     const priceItemsTitles = document.querySelectorAll(".item-price__title");
-    const priceItemsValues = document.querySelectorAll(".item-price__button span");
+    const priceItemsValues = document.querySelectorAll(".link-item-price__main");
+    const priceItemsLinksContainers = document.querySelectorAll(".link-item-price__container");
     const totalPrice = document.querySelector(".price__calculator output");
     const priceSpoilerChoosed = document.querySelector(".spoiler_choosed-price");
     const priceSpoilerChoosedOpener = document.querySelector(".spoiler_choosed-price__opener");
@@ -281,7 +308,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     } else if(spoilersToggleCondition(e)) {
                         spoilersToggleAction(e);
                     } else if(priceItemCondition(e)){
-                        priceItemAction(e, priceItemsTitles, priceItemsValues, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
+                        priceItemAction(e, priceItemsTitles, priceItemsValues, priceItemsLinksContainers, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     } else if(deleteChoosedServiceCondition(e)){
                         deleteChoosedServiceAction(e, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     }
@@ -309,7 +336,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     } else if(spoilersToggleCondition(e)) {
                         spoilersToggleAction(e);
                     } else if(priceItemCondition(e)){
-                        priceItemAction(e, priceItemsTitles, priceItemsValues, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
+                        priceItemAction(e, priceItemsTitles, priceItemsValues, priceItemsLinksContainers, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                         deleteChoosedServiceAction(e, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     }
                 });
@@ -336,7 +363,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     } else if(modalCloserCondition(e)){
                         modalCloserAction(modal, modalCloser, modalTextarea, modalSend, focusableElements, header);
                     } else if(priceItemCondition(e)){
-                        priceItemAction(e, priceItemsTitles, priceItemsValues, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
+                        priceItemAction(e, priceItemsTitles, priceItemsValues, priceItemsLinksContainers, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     } else if(deleteChoosedServiceCondition(e)){
                         deleteChoosedServiceAction(e, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     }
@@ -360,7 +387,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     if(spoilersToggleCondition(e)) {
                         spoilersToggleAction(e);
                     } else if(priceItemCondition(e)){
-                        priceItemAction(e, priceItemsTitles, priceItemsValues, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
+                        priceItemAction(e, priceItemsTitles, priceItemsValues, priceItemsLinksContainers, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     } else if(deleteChoosedServiceCondition(e)){
                         deleteChoosedServiceAction(e, totalPrice, priceSpoilerChoosed, priceSpoilerChoosedInfo, priceSpoilerChoosedList, priceSpoilerChoosedOpener);
                     }
