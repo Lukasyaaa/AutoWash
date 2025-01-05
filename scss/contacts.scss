@@ -1,0 +1,329 @@
+@use "sass:math";
+@use "common";
+
+.contacts{
+    position: relative;
+
+    &__wrapper::before{
+        background: url("@img/contacts/waves.png") center repeat-x;
+        content: "";
+
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        padding-bottom: common.toRem(200);
+    }
+
+    .container{
+        opacity: 1;
+        position: relative;
+        z-index: 2;
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__row{
+            display: flex;
+        }
+    }
+    &__row{
+        overflow: hidden;
+
+        border-radius: common.toRem(32);
+        box-shadow: 0px 4px 4px rgba($color: #000000, $alpha: 0.25);
+        border: common.toRem(5) solid common.$purple;
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__row{
+            border-radius: common.toRem(24);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__image{
+            min-width: calc(common.toRem(690) / (common.toRem(common.$container) - common.toRem(5) * 2) * 100%);
+            padding-bottom: calc(common.toRem(490) / (common.toRem(common.$container) - common.toRem(5) * 2) * 100%);
+        }
+        &__image-inner{
+            padding-bottom: calc(common.toRem(490) / common.toRem(690) * 100%);
+        }
+    }
+    &__image{
+        position: relative;
+
+        background-color: #fff;
+        box-shadow: inset 0 0 15px common.$purple;
+        overflow: hidden;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__image{
+            display: block;
+            width: 100%;
+            padding-bottom: calc(common.toRem(300) / ((common.toRem(738) - common.toRem(5) * 2)) * 100%);
+        }
+    }
+
+    &__image-inner, &__image-inner::after, &__card{
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__image-inner{
+            height: 100%;
+        }
+    }
+
+    &__image-inner::after, &__card{
+        height: 100%;
+    }
+    &__card{
+        object-fit: cover;
+        z-index: 1;
+
+        transition: transform 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+    &__image:focus{
+        outline: none;
+    }
+    &__image:focus &__card{
+        transform: scale(1.025);
+    }
+    @media (any-hover: hover) {
+        &__image:hover &__card{
+            transform: scale(1.025);
+        }
+    }
+
+    &__image-inner::after{
+        background-color: rgba($color: common.$purple, $alpha: 0.2);
+        z-index: 2;
+        content: "";
+    }
+
+    &__icon{
+        position: absolute;
+        z-index: 3;
+        left: calc(common.toRem(193) / common.toRem(690) * 100%);
+        top: calc(common.toRem(170) / common.toRem(490) * 100%);
+
+        object-fit: contain;
+        width: calc(common.toRem(32) / common.toRem(690) * 100%);
+        height: calc(common.toRem(40) / common.toRem(490) * 100%);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__icon{
+            left: common.toPercent(200, 728);
+            top: common.toPercent(67, 300);
+
+            width: calc(common.toRem(32) / ((common.toRem(738) - common.toRem(5) * 2)) * 100%);
+            min-width: common.toRem(20);
+            height: common.toPercent(40, 300);
+            min-height: common.toRem(25);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__info{
+            border-left: common.toRem(5) solid common.$purple;
+        }
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        width: 100%;
+        padding: common.toRem(24) common.toRem(16);
+
+        background-color: #fff;
+        box-shadow: inset 0 0 15px common.$purple;
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__info{
+            padding: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__info{
+            border-top: common.toRem(5) solid common.$purple;
+        }
+    }
+
+    &__group:not(:last-child){
+        margin-bottom: common.toRem(24);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__group:not(:last-child){
+            margin-bottom: common.toRem(16);
+        }
+    }
+
+    &__title{
+        font-family: "Russo One";
+        font-style: normal;
+        color: #000;
+        font-size: common.toRem(28);
+        line-height: 1;
+
+        margin-bottom: common.toRem(5);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__title{
+            font-size: common.toRem(24);
+        }
+    }
+
+    &__link{
+        position: relative;
+        &::after{
+            background: url("@img/icons/arrow_right.svg");
+            background-size: contain;
+
+            content: "";
+
+            position: absolute;
+            left: 0;
+            top: calc(common.toRem(24) / 2);
+            transform: translateY(-50%);
+
+            width: common.toRem(30);
+            height: common.toRem(17.4);
+        }
+        span{
+            font-family: "Russo One";
+            font-style: normal;
+            color: #000;
+            font-size: common.toRem(24);
+            line-height: 1;
+
+            display: inline-block;
+            padding-left: calc(common.toRem(30) + common.toRem(10));
+        }
+        &:not(:last-child){
+            margin-bottom: common.toRem(5);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__link{
+            &::after{
+                top: calc(common.toRem(22) / 2);
+                width: common.toRem(24);
+                height: common.toRem(13.92);
+            }
+            span{
+                font-size: common.toRem(20);
+                padding-left: calc(common.toRem(24) + common.toRem(10));
+            }
+        }
+    }
+
+    &__phone-number{
+        font-family: "Russo One";
+        font-style: normal;
+        color: #000;
+        font-size: common.toRem(24);
+        line-height: 1;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__phone-number a{
+        align-self: flex-start;
+        position: relative;
+        &::after{
+            background-color: common.$purple;
+            content: "";
+
+            width: 0;
+            height: common.toRem(5);
+
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%) translateY(100%);
+
+            transition: width 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+        &:not(:last-child){
+            margin-bottom: common.toRem(6);
+        }
+    }
+    &__phone-number a:focus{
+        outline: none;
+        &::after{
+            width: 100%;
+        }
+    }
+    @media (any-hover: hover) {
+        &__phone-number a:hover::after{
+            width: 100%;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__phone-number{
+            font-size: common.toRem(20);
+        }
+    }
+
+    &__socials-container-inner{
+        display: flex;
+        flex-wrap: wrap;
+        margin: common.toRem(-4) common.toRem(-8);
+    }
+    &__social{
+        padding: common.toRem(4) common.toRem(8);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__socials-container-inner{
+            margin: common.toRem(-4) common.toRem(-5);
+        }
+        &__social{
+            padding: common.toRem(4) common.toRem(5);
+        } 
+    }
+
+    &__social a::after{
+        content: "";
+        display: block;
+
+        transition: 0.5s transform cubic-bezier(.81,.8,.04,.98);
+    }
+    &__social.inst a::after{
+        background: url("@img/icons/instagram.svg") no-repeat;
+        background-size: contain;
+
+        width: common.toRem(40);
+        height: common.toRem(40);
+    }
+    &__social.tg a::after{
+        background: url("@img/icons/telegram.svg") no-repeat;
+        background-size: contain;
+
+        width: common.toRem(40);
+        height: common.toRem(40);
+    }
+    &__social a:focus{
+        outline: none;
+        &::after{
+            transform: rotate(360deg);
+        }
+    }
+    @media (any-hover: hover) {
+        &__social a:hover::after{
+            transform: rotate(360deg);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__social.tg a::after,
+        &__social.inst a::after{
+            width: common.toRem(35);
+            height: common.toRem(35);
+        }
+    }
+}
