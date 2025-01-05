@@ -1,0 +1,817 @@
+@use "common";
+@use "sass:math";
+
+.price{
+    @media (min-width: common.toEm(769, 16)) {
+        &__selects{
+            display: flex;
+            flex-wrap: wrap;
+            margin: common.toRem(-12);
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__selects{
+                margin: common.toRem(-8);
+            }
+        }    
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__select_explanation{
+            padding: common.toRem(12);
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__select_explanation{
+                padding: common.toRem(8);
+            }
+            &__select_explanation:nth-child(1n):last-child{
+                width: 100%;
+            }
+        }
+    }
+    @keyframes scaling_1 {
+        50%{
+            transform: scale(1.05);
+        }
+    }
+    &__select_explanation{
+        width: 33.333%;
+        position: relative;
+
+        &::after,&::before{
+            pointer-events: none;
+
+            content: "";
+            position: absolute;
+        }
+        &::after{
+            border-top-left-radius: common.toRem(16);
+            background-color: #fff;
+            
+            z-index: 1;
+            right: calc(common.toRem(3) + common.toRem(12));
+            bottom: calc(common.toRem(3) + common.toRem(12));
+
+            width: common.toRem(37);
+            height: common.toRem(37);
+        }
+        &::before{
+            background: url("@img/icons/pointer.svg") no-repeat;
+            background-size: contain;
+
+            z-index: 2;
+            bottom: calc(common.toRem(3) + common.toRem(12) + (common.toRem(37) - common.toRem(32)) / 2);
+            right: calc(common.toRem(3) + common.toRem(12) + (common.toRem(37) - common.toRem(23.47)) / 2);
+
+            width: common.toRem(23.47);
+            height: common.toRem(32);
+
+            animation: scaling_1 0.7s cubic-bezier(.81,.8,.04,.98) infinite;
+            animation-play-state: paused;
+
+            transition: filter 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+    }
+    &__select_explanation._focus::before{
+        animation-play-state: running;
+        filter: drop-shadow(0 0 1px common.$purple);
+    }
+    @media (any-hover: hover) {
+        &__select_explanation:hover::before{
+            animation-play-state: running;
+            filter: drop-shadow(0 0 1px common.$purple);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__select_explanation{
+            width: 50%;
+            &::after{
+                right: calc(common.toRem(3) + common.toRem(8));
+                bottom: calc(common.toRem(3) + common.toRem(8));
+            }
+            &::before{
+                bottom: calc(common.toRem(3) + common.toRem(8) + (common.toRem(37) - common.toRem(32)) / 2);
+                right: calc(common.toRem(3) + common.toRem(8) + (common.toRem(37) - common.toRem(23.47)) / 2);
+            }
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) {
+        &__select_explanation{
+            width: 100%;
+            &::after{
+                right: calc(common.toRem(3));
+                bottom: calc(common.toRem(3));
+            }
+            &::before{
+                bottom: calc(common.toRem(3) + (common.toRem(37) - common.toRem(32)) / 2);
+                right: calc(common.toRem(3) + (common.toRem(37) - common.toRem(23.47)) / 2);
+            }
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__select_explanation:not(:last-child){
+            margin-bottom: common.toRem(16);
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__select_explanation:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__spoilers._two-child &__select_explanation{
+            width: 50%;
+        }  
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__select_explanation:first-child:last-child{
+            width: 100%;
+        }   
+    }
+
+    &__items-parent{
+        margin-top: common.toRem(24);
+        overflow: hidden;
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__items-parent{
+            margin-top: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__items-parent{
+            margin-top: common.toRem(10);
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__items{
+            overflow: hidden;
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            margin: common.toRem(-12);
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__items{
+                margin: common.toRem(-8);
+            }
+        }   
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__item{
+            width: 25%;
+        }
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(993, 16)) {
+        &__item{
+            width: 33.333%;
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__item{
+            padding: common.toRem(12);
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__item{
+                width: 50%;
+                padding: common.toRem(8);
+            }
+        }   
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__item{
+            &:not(:last-child){
+                margin-bottom: common.toRem(10);
+            }
+        }
+    }
+
+    &__calculator{
+        font-family: "Russo One";
+        color: #000;
+        font-size: common.toRem(28);
+        line-height: math.div(28, 28);
+
+        margin-top: common.toRem(24);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__calculator{
+            font-size: common.toRem(26);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__calculator{
+            font-size: common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__calculator{
+            font-size: common.toRem(22);
+        }
+    }
+    @media (max-width: common.toEm(320, 16)) {
+        &__calculator{
+            font-size: common.toRem(20);
+        }
+    }
+}
+.select_explanation-price{
+    @media (min-width: common.toEm(993, 16)) {
+        .price__spoilers._two-child &__opener,
+        &:first-child:last-child &__opener{
+            justify-content: center;
+            text-align: center;
+        }  
+    }
+    &__opener{
+        height: 100%;
+        border-bottom-right-radius: unset;
+        padding-right: common.toRem(50);
+
+        text-align: left;
+        font-size: common.toRem(22);
+        line-height: math.div(24, 22);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__opener{
+            justify-content: center;
+            text-align: center;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__opener{
+            border-bottom-right-radius: unset;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__opener{
+            border-bottom-right-radius: unset;
+            font-size: common.toRem(20);
+        }
+    }
+
+    &__info{
+        z-index: 4;
+        left: common.toRem(12);
+        bottom: common.toRem(12);
+
+        width: calc(100% - common.toRem(12) * 2);
+    }        
+    @media (max-width: common.toEm(992, 16)) {
+        &__info{
+            left: common.toRem(8);
+            bottom: common.toRem(8);
+
+            width: calc(100% - common.toRem(8) * 2);
+        }
+    }
+
+    &__link{
+        &::before{
+            top: calc(common.toRem(20) / 2 - common.toRem(1));
+        }
+        span{
+            font-size: common.toRem(20);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link{
+            &::before{
+                top: calc(common.toRem(18) / 2 - common.toRem(1));
+            }
+            span{
+                font-size: common.toRem(18);
+            }
+        }
+    }
+}
+.item-price{
+    &__inner{
+        border-radius: common.toRem(16);
+        padding: common.toRem(16);
+        background-color: common.$purple;
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__inner{
+            padding: common.toRem(10);
+        }
+    }
+
+    &__title{
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        font-family: "Russo One";
+        color: #fff;
+        font-size: common.toRem(28);
+        line-height: math.div(30, 28);
+        text-shadow: 0px 4px 4px rgba($color: #000, $alpha: 0.25);
+
+        margin-bottom: common.toRem(10);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__title{
+            font-size: common.toRem(24);
+        }
+    }
+
+    &__list-inner{
+        height: 100%;
+    }
+
+    &__link:not(:last-child){
+        margin-bottom: common.toRem(10);
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__button{
+            min-height: common.toRem(48);
+        }
+    }
+    &__button{
+        border-radius: calc(common.toRem(16) / 2);
+        background-color: #fff;
+        padding: common.toRem(10) common.toRem(10) common.toRem(10) calc(common.toRem(52) + common.toRem(10));
+
+        min-width: 100%;
+        height: 100%;
+
+        text-align: right;
+        font-family: "Russo One";
+        color: common.$purple;
+        font-size: common.toRem(24);
+        line-height: 1;
+
+        transition: box-shadow 0.3s cubic-bezier(.81,.8,.04,.98),
+        text-shadow 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+    &__button:focus{
+        outline: none;
+        box-shadow: 0 0 10px #fff;
+        text-shadow: 0 0 2px common.$purple;
+    }
+    @media (any-hover: hover) {
+        &__button:hover{
+            box-shadow: 0 0 10px #fff;
+            text-shadow: 0 0 2px common.$purple;
+        }
+    }
+
+    &__link > &__button{
+        position: relative;
+        z-index: 1;
+        &::after{
+            content: "";
+
+            position: absolute;
+            left: common.toRem(10);
+            bottom: 50%;
+            transform: translateY(50%);
+        
+            width: common.toRem(52);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link > &__button::after{
+            width: common.toRem(42);
+        }
+    }
+
+    &__link.passenger &__button::after{
+        background: url("@img/icons/car-passenger.svg");
+        background-size: contain;
+        height: common.toRem(26);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link.passenger &__button::after{
+            height: common.toRem(21);
+        }
+    }
+
+    &__link.crossover &__button::after{
+        background: url("@img/icons/crossover.svg");
+        background-size: contain;
+        height: common.toRem(30.87);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link.crossover &__button::after{
+            height: common.toRem(24.933);
+        }
+    }
+
+    &__link.jeep &__button::after{
+        background: url("@img/icons/jeep.svg");
+        background-size: contain;
+        height: common.toRem(33.07);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link.jeep &__button::after{
+            height: common.toRem(26.71);
+        }
+    }
+
+
+    &__link.minivan &__button::after{
+        background: url("@img/icons/minivan.svg");
+        background-size: contain;
+        height: common.toRem(41.4);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link.minivan &__button::after{
+            height: common.toRem(33.438);
+        }
+    }
+
+    &__list-inner > &__button{
+        font-size: common.toRem(48);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__list-inner > &__button{
+            font-size: common.toRem(42);
+        }  
+    }
+}
+.item_common-price{
+    &__inner{
+        position: relative;
+        &::after, &::before{
+            border-radius: common.toRem(4);
+            background-color: common.$purple;
+            content: "";
+            pointer-events: none;
+
+            position: absolute;
+            z-index: 2;
+            left: calc(common.toRem(16) + common.toRem(10));
+            transform: translateY(50%);
+
+            width: calc(100% - common.toRem(32) - common.toRem(20));
+            height: common.toRem(4);
+        }
+        &::before{
+            bottom: calc(common.toRem(48) * 3 + common.toRem(10) * 2 + common.toRem(10) / 2 + common.toRem(16));
+        }
+        &::after{
+            bottom: calc(common.toRem(48) + common.toRem(10) / 2 + common.toRem(16));
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__inner{
+            &::before{
+                bottom: calc(common.toRem(44) * 3 + common.toRem(10) * 2 + common.toRem(10) / 2 + common.toRem(16));
+            }
+            &::after{
+                bottom: calc(common.toRem(44) + common.toRem(10) / 2 + common.toRem(16));
+            }
+        }
+    }
+
+    &__list{
+        min-height: common.toRem(222);
+        //Passenger
+        &::after{
+            background: url("@img/icons/car-passenger.svg") no-repeat;
+
+            top: calc((common.toRem(48) - common.toRem(26)) / 2);
+            height: common.toRem(26);
+        }
+        //MiniVan
+        &::before{
+            background: url("@img/icons/minivan.svg") no-repeat;
+            bottom: calc((common.toRem(48) - common.toRem(41.1)) / 2);
+            height: common.toRem(41.1);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__list{
+            min-height: common.toRem(206);
+            &::after{
+                top: calc((common.toRem(44) - common.toRem(21)) / 2);
+                height: common.toRem(21);
+            }
+            &::before{
+                bottom: calc((common.toRem(44) - common.toRem(33.438)) / 2);
+                height: common.toRem(33.438);
+            }
+        } 
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__list, &__list-inner{
+            display: flex;
+            flex-direction: column;
+        }
+        &__list-inner, &__button{
+            flex: 1 1 auto;
+        }   
+    }
+
+    &__list-inner{
+        //Crossover
+        &::after{
+            background: url("@img/icons/crossover.svg") no-repeat;
+
+            top: calc(common.toRem(48) + common.toRem(10) + (common.toRem(48) - common.toRem(30.87)) / 2);
+            height: common.toRem(30.87);
+        }
+        //Jeep
+        &::before{
+            background: url("@img/icons/jeep.svg") no-repeat;
+            bottom: calc(common.toRem(48) + common.toRem(10) + (common.toRem(48) - common.toRem(33.07)) / 2);
+            height: common.toRem(33.07);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__list-inner{
+            &::after{
+                top: calc(common.toRem(44) + common.toRem(10) + (common.toRem(44) - common.toRem(24.933)) / 2);
+                height: common.toRem(24.933);
+            }
+            &::before{
+                bottom: calc(common.toRem(44) + common.toRem(10) + (common.toRem(44) - common.toRem(26.71)) / 2);
+                height: common.toRem(26.71);
+            }
+        } 
+    }
+
+    &__list, &__list-inner{
+        position: relative;
+        &::after, &::before{
+            background-size: contain;
+            content: "";
+            pointer-events: none;
+
+            position: absolute;
+            z-index: 2;
+            
+            left: common.toRem(10);
+
+            width: common.toRem(52);
+        }
+    }
+
+    &__button{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        span{
+            background-color: #fff;
+            position: relative;
+            z-index: 3;
+        }
+        &::before{
+            border-radius: common.toRem(4);
+            background-color: common.$purple;
+            content: "";
+
+            display: block;
+            margin-right: common.toRem(16);
+            margin-left: common.toRem(-52);
+            width: 100%;
+            height: common.toRem(4);
+        }
+    }
+}
+.spoiler_choosed-price{
+    &._disabled &__opener{
+        opacity: 0.7;
+        cursor: default;
+    }
+    &__opener{
+        justify-content: center;
+
+        font-size: common.toRem(28);
+        line-height: math.div(28, 28);
+
+        position: relative;
+        &::after{
+            background: url("@img/icons/arrow_bottom_white.svg") no-repeat;
+            background-size: contain;
+            content: "";
+
+            position: relative;
+            z-index: 2;
+
+            display: block;
+            margin-left: common.toRem(10);
+            min-width: common.toEm(24, 28);
+            height: common.toEm(16, 28);
+        }
+        &::before{
+            border-radius: common.toRem(16);
+            background-color: #fff;
+            border: 0 solid common.$purple;
+            content: "";
+    
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+    
+            width: 0;
+            height: 0;
+    
+            pointer-events: none;
+            transition: border-radius 0s cubic-bezier(.81,.8,.04,.98) 0.3s,
+            width 0.3s cubic-bezier(.81,.8,.04,.98),
+            height 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+        span{
+            position: relative;
+            z-index: 2;
+        }
+
+        transition: color 0.3s cubic-bezier(.81,.8,.04,.98),
+        border-radius 0s linear 0.3s,
+        opacity 0.3s cubic-bezier(.81,.8,.04,.98);
+    }
+    &._active &__opener{
+        transition: color 0.3s cubic-bezier(.81,.8,.04,.98),
+        border-radius 0s linear,
+        opacity 0.3s cubic-bezier(.81,.8,.04,.98);
+        &::before{
+            border-radius: common.toRem(16) common.toRem(16) 0 0;
+            transition: color 0.3s cubic-bezier(.81,.8,.04,.98);
+        }
+    }
+    &:not(._disabled) &__opener:focus{
+        color: common.$purple;
+        &::before{
+            border-width: common.toRem(3);
+            width: 100%;
+            height: 100%;
+        }
+        &::after{
+            background-image: url("@img/icons/arrow_bottom_purple.svg");
+        }
+    }
+    @media (any-hover: hover) {
+        &:not(._disabled) &__opener:hover{
+            color: common.$purple;
+            &::before{
+                border-width: common.toRem(3);
+                width: 100%;
+                height: 100%;
+            }
+            &::after{
+                background-image: url("@img/icons/arrow_bottom_purple.svg");
+            }
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__opener{
+            font-size: common.toRem(26);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__opener{
+            font-size: common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(320, 16)) {
+        &__opener{
+            font-size: common.toRem(22);
+        }
+    }
+
+    &__link{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @keyframes scaling_2 {
+        50%{
+            transform: scale(1.05) translateY(-50%);
+        }
+    }
+    &__link{
+        &::before{
+            top: calc(common.toRem(26) / 2 - common.toRem(1));
+        }
+        span{
+            font-size: common.toRem(26);
+            padding-right: calc(common.toRem(32) + common.toRem(10));
+        }
+
+        position: relative;
+        button{
+            position: absolute;
+            top: common.toRem(-2);
+            left: common.toRem(-16);
+
+            width: calc(100% + common.toRem(32));
+            height: calc(100% + common.toRem(4));
+
+            &::after{
+                background-color: common.$purple;
+                content: "";
+
+                position: absolute;
+                right: common.toRem(16);
+                top: 50%;
+                transform: translateY(-50%);
+
+                width: common.toRem(32);
+                height: common.toRem(5);
+
+                
+                animation: scaling_2 0.7s cubic-bezier(.81,.8,.04,.98) infinite;
+                animation-play-state: paused;
+
+                transition: filter 0.3s cubic-bezier(.81,.8,.04,.98);
+            }
+        }
+    }
+    &__link:first-child:not(:last-child) button{
+        top: common.toRem(-10);
+        height: calc(100% + common.toRem(10) + common.toRem(2));
+        &::after{
+            top: calc((100% + common.toRem(10)) / 2);
+        }
+    }
+    &__link:last-child:not(:first-child) button{
+        height: calc(100% + common.toRem(2) + common.toRem(10));
+        &::after{
+            top: calc((100% - common.toRem(10)) / 2);
+        }
+    }
+    &__link:first-child:last-child button{
+        top: common.toRem(-10);
+        height: calc(100% + common.toRem(10) + common.toRem(10));
+    }
+    &__link button:focus{
+        outline: none;
+        &::after{
+            animation-play-state: running;
+            filter: drop-shadow(0 0 1px common.$purple);
+        }
+    }
+    @media (any-hover: hover) {
+        &__link button:hover::after{
+            animation-play-state: running;
+            filter: drop-shadow(0 0 1px common.$purple);
+        }
+    }
+
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link{
+            &::before{
+                top: calc(common.toRem(24) / 2 - common.toRem(1));
+            }
+            span{
+                font-size: common.toRem(24);
+            }
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(321, 16)) {
+        &__link{
+            span{
+                padding-right: calc(common.toRem(24) + common.toRem(10));
+            }
+            button::after{
+                width: common.toRem(24);
+            }
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) and (min-width: common.toEm(321, 16)) {
+        &__link{
+            &::before{
+                top: calc(common.toRem(22) / 2 - common.toRem(1));
+            }
+            span{
+                font-size: common.toRem(22);
+            }
+        }
+    }
+    @media (max-width: common.toEm(320, 16)) {
+        &__link{
+            &::before{
+                top: calc(common.toRem(20) / 2 - common.toRem(1));
+            }
+            span{
+                font-size: common.toRem(20);
+                padding-right: calc(common.toRem(16) + common.toRem(10));
+            }
+            button::after{
+                width: common.toRem(16);
+            }
+        }
+    }
+}

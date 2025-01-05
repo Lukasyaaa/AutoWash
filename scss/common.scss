@@ -20,3 +20,209 @@ $container: 1180;
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.section{
+    padding-top: toRem(32);
+    padding-bottom: toRem(32);
+    &:nth-child(2){
+        padding-top: toRem(64);
+    }
+    &:last-child{
+        padding-bottom: toRem(64);
+    }
+    @media (max-width: toEm(992, 16)) and (min-width: toEm(769, 16)) {
+        padding-top: toRem(24);
+        padding-bottom: toRem(24);
+        &:nth-child(2){
+            padding-top: toRem(48);
+        }
+        &:last-child{
+            padding-bottom: toRem(48);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(16);
+        padding-bottom: toRem(16);
+        &:nth-child(2){
+            padding-top: toRem(32);
+        }
+        &:last-child{
+            padding-bottom: toRem(32);
+        }
+    }
+
+    @media (min-width: toEm($container + 30 + 41 * 2 + 48 * 2, 16)) {
+        position: relative;
+        &::after{
+            background: url("@img/icons/drop.svg") no-repeat;
+            background-size: contain;
+            content: "";
+    
+            position: absolute;
+            right: toRem(41);
+            top: 50%;
+            transform: translateY(-50%);
+    
+            width: toRem(48);
+            height: toRem(69.82);
+        }
+        &:nth-child(2)::after{
+            top: calc((100% - toRem(64) - toRem(32)) / 2);
+            transform: translateY(50%);
+        }
+        padding-bottom: toRem(32);
+        &:last-child::after{
+            top: unset;
+            bottom: calc((100% - toRem(64) - toRem(32)) / 2);
+            transform: translateY(-50%);
+        }
+    }
+
+    &__heading{
+        text-align: center;
+
+        font-family: "Russo One";
+        color: #000;
+        font-size: toRem(36);
+        line-height: math.div(43, 36);
+
+        padding-bottom: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) and (min-width: toEm(481, 16)) {
+        &__heading{
+            font-size: toRem(32);
+            padding-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(28);
+            padding-bottom: toRem(10);
+        }
+    }
+}
+
+@media (min-width: toEm($container + 30 + 41 * 2 + 48 * 2, 16)) {
+    .comparasion ~ *{
+        position: relative;
+        &::before{
+            background: url("@img/icons/drop.svg") no-repeat;
+            background-size: contain;
+            content: "";
+    
+            position: absolute;
+            left: toRem(41);
+            top: 0;
+            transform: translateY(-50%);
+    
+            width: toRem(48);
+            height: toRem(69.82);
+        }
+    }
+}
+
+.select{
+    &__info{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translateY(100%);
+    }
+}
+.spoiler, .select{
+    position: relative;
+
+    &__opener{
+        background-color: $purple;
+        border-top-left-radius: toRem(16);
+        border-top-right-radius: toRem(16);
+        border-bottom-right-radius: toRem(16);
+        border-bottom-left-radius: toRem(16);
+        
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+
+        min-height: toRem(64);
+        padding-top: toRem(10);
+        padding-bottom: toRem(10);
+        padding-left: toRem(16);
+        padding-right: toRem(16);
+
+        font-family: "Russo One";
+        color: #fff;
+
+        transition: 0s linear border-radius 0.3s;
+    }
+    &__opener:focus{
+        outline: none;
+    }
+    &._active &__opener{
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+        transition: 0s linear border-radius;
+    }
+    @media (max-width: toEm(768, 16)) and (min-width: toEm(481, 16)) {
+        &__opener{
+            border-top-left-radius: toRem(14.5);
+            border-top-right-radius: toRem(14.5);
+            border-bottom-right-radius: toRem(14.5);
+            border-bottom-left-radius: toRem(14.5);
+            min-height: toRem(58);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__opener{
+            border-top-left-radius: toRem(13);
+            border-top-right-radius: toRem(13);
+            border-bottom-right-radius: toRem(13);
+            border-bottom-left-radius: toRem(13);
+            min-height: toRem(52);
+        }
+    }
+
+    &__info{
+        height: 0;
+        overflow: hidden;
+
+        transition: 0.3s linear height;
+        filter: drop-shadow(0 0 5px $purple);
+    }
+
+    &__list{
+        padding: toRem(10) toRem(16);
+
+        border: toRem(3) solid $purple;
+        border-top: 0;
+
+        border-radius: 0 0 toRem(16) toRem(16);
+        background-color: #fff;
+    }
+
+    &__link{
+        position: relative;
+
+        &::before{
+            background-color: $purple;
+            border-radius: 50%;
+            content: "";
+
+            position: absolute;
+            left: 0;
+            transform: translateY(-50%);
+
+            width: toRem(8);
+            height: toRem(8);
+        }
+        span{
+            padding-left: toRem(16);
+            font-family: "Russo One";
+            color: $purple;
+            line-height: math.div(20, 20);
+        }
+    }
+    &__link:not(:last-child){
+        margin-bottom: toRem(4);
+    }
+}
