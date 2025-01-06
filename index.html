@@ -28,5 +28,13 @@
         @@include('html/contacts.html', {})
     </main>
     <script src="js/app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+           emailjs.init({
+             publicKey: "TxISC1kzhtj6yiWab",
+           });
+        })();
+     </script>
 </body>
 </html>

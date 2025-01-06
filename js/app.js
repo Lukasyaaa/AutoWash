@@ -215,7 +215,33 @@ const modalEnable = (modal, modalCloser, modalTextarea, modalSend, focusableElem
     });
 }
 
+
 window.addEventListener("DOMContentLoaded", () => {
+    const orderTextarea = document.querySelector(".order__textarea");
+    const orderSend = document.querySelector('.order__send');
+    if(orderTextarea){
+        orderTextarea.addEventListener("input", (e) => {
+            if(e.target.value !== ""){
+                orderSend.classList.remove("_disabled");
+                orderSend.tabIndex = 0;
+            } else {
+                orderSend.classList.add("_disabled");
+                orderSend.tabIndex = -1;
+            }
+        })
+        orderSend.addEventListener('click', () => {
+            if(orderTextarea.value !== ""){
+                emailjs.send("service_owzm1yn", "template_9yqzyiw", {
+                    message: orderTextarea.value
+                });
+                orderTextarea.value = "";
+                orderSend.classList.add("_disabled");
+                orderSend.tabIndex = -1;
+            }
+        });
+    }
+
+
     const priceContainer = document.querySelector(".price__spoilers");
     const priceSelects = document.querySelectorAll(".price__spoiler_explanation");
     if(priceContainer && priceSelects.length === 2){
@@ -255,6 +281,33 @@ window.addEventListener("DOMContentLoaded", () => {
     const priceSpoilerChoosedOpener = document.querySelector(".spoiler_choosed-price__opener");
     const priceSpoilerChoosedInfo = document.querySelector(".spoiler_choosed-price__info");
     const priceSpoilerChoosedList = document.querySelector(".spoiler_choosed-price__list");
+
+    const priceSpoilers = document.querySelectorAll(".select_explanation-price");
+    const priceSpoilersOpeners = document.querySelectorAll(".select_explanation-price__opener");
+    if(priceSpoilers && priceSpoilersOpeners){
+        priceSpoilersOpeners.forEach((spoilerOpener, i) => {
+            spoilerOpener.addEventListener("focus", () => {
+                priceSpoilers[i].classList.add("_focus");
+            });
+            spoilerOpener.addEventListener("blur", () => {
+                priceSpoilers[i].classList.remove("_focus");
+            });
+        });
+    }
+
+    const partComparasion = document.querySelector(".part_after-item-comparasion img");
+    const comparasionItemLines = document.querySelectorAll(".part-item-comparasion__line");
+    const comparasionItems = document.querySelectorAll(".comparasion__item");
+    if(comparasionItemLines.length !== 0 && comparasionItemLines.length === comparasionItems.length && partComparasion){
+        const matrix = getComputedStyle(comparasionItemLines[0]).transform.match(/matrix\((.*)\)/)[1].split(', ').map(parseFloat);
+        const angle = Math.atan2(matrix[1], matrix[0]) * (180 / Math.PI);
+        
+        const startComparasionPartWidth = parseFloat(getComputedStyle(partComparasion).width);
+        comparasionItemLines.forEach(comparasionItemLine => {
+            comparasionItemLine.style.transform = 
+                `rotate(${startComparasionPartWidth / partComparasion.offsetWidth * angle}deg) translateX(-100%)`;
+        })
+    }
 
     if(header){
         document.querySelectorAll(".menu__link a").forEach(anchor => {
@@ -400,32 +453,5 @@ window.addEventListener("DOMContentLoaded", () => {
                 });
             }
         }
-    }
-
-    const priceSpoilers = document.querySelectorAll(".select_explanation-price");
-    const priceSpoilersOpeners = document.querySelectorAll(".select_explanation-price__opener");
-    if(priceSpoilers && priceSpoilersOpeners){
-        priceSpoilersOpeners.forEach((spoilerOpener, i) => {
-            spoilerOpener.addEventListener("focus", () => {
-                priceSpoilers[i].classList.add("_focus");
-            });
-            spoilerOpener.addEventListener("blur", () => {
-                priceSpoilers[i].classList.remove("_focus");
-            });
-        });
-    }
-
-    const partComparasion = document.querySelector(".part_after-item-comparasion img");
-    const comparasionItemLines = document.querySelectorAll(".part-item-comparasion__line");
-    const comparasionItems = document.querySelectorAll(".comparasion__item");
-    if(comparasionItemLines.length !== 0 && comparasionItemLines.length === comparasionItems.length && partComparasion){
-        const matrix = getComputedStyle(comparasionItemLines[0]).transform.match(/matrix\((.*)\)/)[1].split(', ').map(parseFloat);
-        const angle = Math.atan2(matrix[1], matrix[0]) * (180 / Math.PI);
-        
-        const startComparasionPartWidth = parseFloat(getComputedStyle(partComparasion).width);
-        comparasionItemLines.forEach(comparasionItemLine => {
-            comparasionItemLine.style.transform = 
-                `rotate(${startComparasionPartWidth / partComparasion.offsetWidth * angle}deg) translateX(-100%)`;
-        })
     }
 });
